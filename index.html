@@ -15,6 +15,54 @@
 
 function toggleContainer(s,h1,h2)
 {
+	
+	if(s == 'productDesc')
+	{
+		if(document.forms['promoForm']['prodDesc'].value == '')
+		{
+			alert('Please enter a product description to continue.');
+			return false;
+		}
+		document.getElementById('descLink').style.color = 'Black';
+		document.getElementById('specLink').style.color = 'white';
+		document.getElementById('infoLink').style.color = 'white';
+	}
+	else if(s == 'specInstruct')
+	{
+		if(document.forms['promoForm']['specIns'].value == '')
+		{
+			alert('Please enter any special instructions to continue.*\n\n*Enter "NONE" if there are no special instructions.');
+			return false;
+		}
+		document.getElementById('descLink').style.color = 'white';
+		document.getElementById('specLink').style.color = 'Black';
+		document.getElementById('infoLink').style.color = 'white';
+	}
+	else if(s == 'productInfo')
+	{
+		var msg = '';
+		if(document.forms['promoForm']['destZip'].value == '')
+		{
+			msg = 'Please enter a destination zip code.\n';
+		}
+		if(document.forms['promoForm']['quantity1'].value == '')
+		{
+			msg = msg + 'Please enter a quantity in the first quantity box.\n';
+		}
+		if(document.forms['promoForm']['color'].value == '')
+		{
+			msg = msg + 'Please enter an item color.';
+		}
+		document.getElementById('descLink').style.color = 'white';
+		document.getElementById('specLink').style.color = 'white';
+		document.getElementById('infoLink').style.color = 'Black';
+	}
+	if(msg != '')
+	{
+		alert(msg);
+		return false;
+	}
+	
 	var show = '#'+s;
 	var hide1 = '#'+h1;
 	var hide2 = '#'+h2;
@@ -38,11 +86,11 @@ $(document).ready(function()
 
 <div style="background-color:#CECECE;width:100%;padding:25px 0px 25px 0px;">
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a href="javascript:toggleContainer('productDesc','specInstruct','productInfo');" style="text-decoration:none;color:white;">Description</a>
+	<a id="descLink" href="javascript:toggleContainer('productDesc','specInstruct','productInfo');" style="text-decoration:none;color:white;">Description</a>
 	&nbsp;&nbsp;&nbsp;&nbsp;
-   	<a href="javascript:toggleContainer('specInstruct','productInfo','productDesc');" style="text-decoration:none;color:white;">Instructions</a>
+   	<a id="specLink" href="javascript:toggleContainer('specInstruct','productInfo','productDesc');" style="text-decoration:none;color:white;">Instructions</a>
    	&nbsp;&nbsp;&nbsp;&nbsp;
-   	<a href="javascript:toggleContainer('productInfo','productDesc','specInstruct');" style="text-decoration:none;color:white;">Information</a>
+   	<a id="infoLink" href="javascript:toggleContainer('productInfo','productDesc','specInstruct');" style="text-decoration:none;color:white;">Information</a>
 </div>
 
 <form name="promoForm" enctype="multipart/form-data" method="post" action="">
@@ -86,7 +134,7 @@ $(document).ready(function()
         	<td align="center">Please enter any instructions below:</td>
         </tr>
     	<tr>
-        	<td align="center"><textarea name="prodDesc" id="prodDesc" rows="10" cols="30"></textarea></td>
+        	<td align="center"><textarea name="specIns" id="specIns" rows="10" cols="30"></textarea></td>
         </tr>
     	<tr>
         	<td>&nbsp;</td>
