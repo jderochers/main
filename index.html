@@ -15,9 +15,17 @@
 function validate()
 {
 	var msg = '';
+	if(document.forms['promoForm']['prodDesc'].value == '')
+	{
+		msg = msg + 'Please enter a product description to continue.\n';
+	}
+	if(document.forms['promoForm']['specIns'].value == '')
+	{
+		msg = msg + 'Please enter any special instructions to continue. Enter "NONE" if there are no special instructions.\n';
+	}
 	if(document.forms['promoForm']['destZip'].value == '')
 	{
-		msg = 'Please enter a destination zip code.\n';
+		msg = msg + 'Please enter a destination zip code.\n';
 	}
 	if(document.forms['promoForm']['quantity1'].value == '')
 	{
@@ -32,28 +40,16 @@ function validate()
 		alert(msg);
 		return false;
 	}
+	else
+	{
+		return true;
+	}
 }
 function toggleContainer(s,h1,h2)
 {
 	
 	if(s == 'specInstruct')
 	{
-		if(document.forms['promoForm']['prodDesc'].value == '')
-		{
-			alert('Please enter a product description to continue.');
-			return false;
-		}
-		document.getElementById('descLink').style.color = 'Black';
-		document.getElementById('specLink').style.color = 'white';
-		document.getElementById('infoLink').style.color = 'white';
-	}
-	else if(s == 'productInfo')
-	{
-		if(document.forms['promoForm']['specIns'].value == '')
-		{
-			alert('Please enter any special instructions to continue.*\n\n*Enter "NONE" if there are no special instructions.');
-			return false;
-		}
 		document.getElementById('descLink').style.color = 'white';
 		document.getElementById('specLink').style.color = 'Black';
 		document.getElementById('infoLink').style.color = 'white';
@@ -63,6 +59,12 @@ function toggleContainer(s,h1,h2)
 		document.getElementById('descLink').style.color = 'white';
 		document.getElementById('specLink').style.color = 'white';
 		document.getElementById('infoLink').style.color = 'Black';
+	}
+	else if(s == 'productDesc')
+	{
+		document.getElementById('descLink').style.color = 'Black';
+		document.getElementById('specLink').style.color = 'white';
+		document.getElementById('infoLink').style.color = 'white';
 	}
 	
 	var show = '#'+s;
@@ -88,14 +90,14 @@ $(document).ready(function()
 
 <div style="background-color:#CECECE;width:100%;padding:25px 0px 25px 0px;">
 	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a id="descLink" href="javascript:toggleContainer('productDesc','specInstruct','productInfo');" style="text-decoration:none;color:white;">Description</a>
+	<a id="descLink" href="javascript:toggleContainer('productDesc','specInstruct','productInfo');" style="text-decoration:none;color:black;">Description</a>
 	&nbsp;&nbsp;&nbsp;&nbsp;
    	<a id="specLink" href="javascript:toggleContainer('specInstruct','productInfo','productDesc');" style="text-decoration:none;color:white;">Instructions</a>
    	&nbsp;&nbsp;&nbsp;&nbsp;
    	<a id="infoLink" href="javascript:toggleContainer('productInfo','productDesc','specInstruct');" style="text-decoration:none;color:white;">Information</a>
 </div>
 
-<form name="promoForm" enctype="multipart/form-data" method="post" action="">
+<form name="promoForm" enctype="multipart/form-data" method="post" onsubmit="return validate;" action="">
 <div id="productDesc">
     <table style="width:100%;">
     	<tr>
