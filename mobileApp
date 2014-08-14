@@ -1,0 +1,145 @@
+
+<script type="text/javascript" src="https://www.ppicic.com/js/jquery/jquery-1.9.1.js"></script>
+<script type="text/javascript" src="https://www.ppicic.com/js/jquery/jquery-ui.js"></script>
+<script type="text/javascript" src="https://www.ppicic.com/js/jquery/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" src="https://www.ppicic.com/js/common/detailShowHide.js"></script>
+<script type="text/javascript" src="https://www.ppicic.com/js/common/common.js"></script>
+<script type="text/javascript" src="https://www.ppicic.com/js/common/datePicker.js"></script>
+<script type="text/javascript" src="https://www.ppicic.com/js/jPanel/modernizr-2.6.1.min.js"></script>
+<script type="text/javascript" src="https://www.ppicic.com/js/jPanel/Respond.js"></script>
+<script type="text/javascript" src="https://www.ppicic.com/js/jPanel/highlight.min.js"></script>
+<script type="text/javascript" src="https://www.ppicic.com/js/jPanel/jquery.jpanelmenu.min.js"></script>
+<script type="text/javascript" src="https://www.ppicic.com/js/jPanel/plugins.js"></script>
+
+<script type="text/javascript">
+
+function toggleContainer(s,h1,h2)
+{
+	var show = '#'+s;
+	var hide1 = '#'+h1;
+	var hide2 = '#'+h2;
+	
+	$(show).show();
+	$(hide1).hide();
+	$(hide2).hide();
+}
+$(document).ready(function() 
+{
+	$('#specInstruct').hide();
+	$('#productInfo').hide();
+})	
+</script>
+
+<style>
+#productDesc{
+	font-size:24px;
+	width:100%;
+}
+</style>
+
+<div style="background-color:#CECECE;width:100%;font-size:24px;padding:25px 0px 25px 0px;">
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<a href="javascript:toggleContainer('productDesc','specInstruct','productInfo');" style="text-decoration:none;color:white;">Description</a>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+   	<a href="javascript:toggleContainer('specInstruct','productInfo','productDesc');" style="text-decoration:none;color:white;">Instructions</a>
+   	&nbsp;&nbsp;&nbsp;&nbsp;
+   	<a href="javascript:toggleContainer('productInfo','productDesc','specInstruct');" style="text-decoration:none;color:white;">Information</a>
+</div>
+
+<form name="promoForm" enctype="multipart/form-data" method="post" action="">
+<div id="productDesc">
+    <table style="width:100%;font-size:24px;">
+    	<tr>
+        	<td>&nbsp;</td>
+        </tr>
+    	<tr style="background-color:#CECECE;">
+        	<td style="padding:10px 0px 10px 10px;">Product Description</td>
+        </tr>
+    	<tr>
+        	<td>&nbsp;</td>
+        </tr>
+    	<tr>
+        	<td align="center">Please enter a description of the product below:</td>
+        </tr>
+    	<tr>
+        	<td align="center"><textarea name="prodDesc" id="prodDesc" rows="10" cols="50"></textarea></td>
+        </tr>
+    	<tr>
+        	<td align="center"><a href="javascript:toggleContainer('specInstruct','productInfo','productDesc');"><img src="https://www.ppicic.com/imgCenter/odpromo/portal/icons/rightArrow.png" height="50px" /></a></td>
+        </tr>
+    </table>
+</div>
+<div id="specInstruct" style="width:100%;font-size:24px;">
+    <table style="width:100%;font-size:24px;">
+    	<tr>
+        	<td>&nbsp;</td>
+        </tr>
+    	<tr style="background-color:#CECECE;">
+        	<td style="padding:10px 0px 10px 10px;">Special Instructions</td>
+        </tr>
+    	<tr>
+        	<td>&nbsp;</td>
+        </tr>
+    	<tr>
+        	<td align="center">Please enter any instructions below:</td>
+        </tr>
+    	<tr>
+        	<td align="center"><textarea name="prodDesc" id="prodDesc" rows="10" cols="50"></textarea></td>
+        </tr>
+    	<tr>
+        	<td align="center"><a href="javascript:toggleContainer('productDesc','specInstruct','productInfo');"><img src="https://www.ppicic.com/imgCenter/odpromo/portal/icons/leftArrow.png" height="50px" /></a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="javascript:toggleContainer('productInfo','productDesc','specInstruct');"><img src="https://www.ppicic.com/imgCenter/odpromo/portal/icons/rightArrow.png" height="50px" /></a></td>
+        </tr>
+    </table>
+</div>
+<div id="productInfo" style="width:100%;font-size:24px;">
+    <table style="width:100%;font-size:24px;">
+    	<tr>
+        	<td>&nbsp;</td>
+        </tr>
+    	<tr style="background-color:#CECECE;padding:25px;">
+        	<td colspan="2">Product Information</td>
+        </tr>
+    	<tr>
+        	<td>&nbsp;</td>
+        </tr>
+        <tr>
+            <td>Product Type</td>
+            <td>
+            	<select	name="prodType" id="prodType">
+                	<option value="1">Apparel</option>
+                	<option value="2">Non-Apparel</option>
+                	<option value="3">Hats</option>
+                	<option value="4">Calendars</option>
+                	<option value="5">Drinkware</option>
+                	<option value="6">Pens</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Destination Zip Code</td><td><input type="text" name="destZip" id="destZip" value="" /></td>
+        </tr>
+        <tr>
+            <td>Quantities:</td>
+            <td>
+            	<input type="text" name="quantity1" id="quantity1" value="" style="width:50px" />
+            	<input type="text" name="quantity2" id="quantity2" value="" style="width:50px" />
+            	<input type="text" name="quantity3" id="quantity3" value="" style="width:50px" />
+            	<input type="text" name="quantity4" id="quantity4" value="" style="width:50px" />
+            	<input type="text" name="quantity5" id="quantity5" value="" style="width:50px" />
+            </td>
+        </tr>
+        <tr>
+            <td>Item Color:</td><td><input type="text" name="color" id="color" value="" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="radio" name="proofReq" id="proofReq" value="1" checked />&nbsp;&nbsp;E-Proof Required&nbsp;&nbsp;
+                <input type="radio" name="proofReq" id="proofReq" value="0" />&nbsp;&nbsp;E-Proof Waived
+            </td>
+        </tr>
+    	<tr>
+        	<td align="center"><a href="javascript:toggleContainer('specInstruct','productInfo','productDesc');"><img src="https://www.ppicic.com/imgCenter/odpromo/portal/icons/leftArrow.png" height="50px" /></a></td>
+        </tr>
+    </table>
+</div>
+</form>
