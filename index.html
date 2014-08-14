@@ -12,11 +12,26 @@
 <script type="text/javascript" src="https://www.ppicic.com/js/jPanel/plugins.js"></script>
 
 <script type="text/javascript">
-
+function validate()
+{
+	var msg = '';
+	if(document.forms['promoForm']['destZip'].value == '')
+	{
+		msg = 'Please enter a destination zip code.\n';
+	}
+	if(document.forms['promoForm']['quantity1'].value == '')
+	{
+		msg = msg + 'Please enter a quantity in the first quantity box.\n';
+	}
+	if(document.forms['promoForm']['color'].value == '')
+	{
+		msg = msg + 'Please enter an item color.';
+	}
+}
 function toggleContainer(s,h1,h2)
 {
 	
-	if(s == 'productDesc')
+	if(s == 'specInstruct')
 	{
 		if(document.forms['promoForm']['prodDesc'].value == '')
 		{
@@ -27,7 +42,7 @@ function toggleContainer(s,h1,h2)
 		document.getElementById('specLink').style.color = 'white';
 		document.getElementById('infoLink').style.color = 'white';
 	}
-	else if(s == 'specInstruct')
+	else if(s == 'productInfo')
 	{
 		if(document.forms['promoForm']['specIns'].value == '')
 		{
@@ -40,19 +55,6 @@ function toggleContainer(s,h1,h2)
 	}
 	else if(s == 'productInfo')
 	{
-		var msg = '';
-		if(document.forms['promoForm']['destZip'].value == '')
-		{
-			msg = 'Please enter a destination zip code.\n';
-		}
-		if(document.forms['promoForm']['quantity1'].value == '')
-		{
-			msg = msg + 'Please enter a quantity in the first quantity box.\n';
-		}
-		if(document.forms['promoForm']['color'].value == '')
-		{
-			msg = msg + 'Please enter an item color.';
-		}
 		document.getElementById('descLink').style.color = 'white';
 		document.getElementById('specLink').style.color = 'white';
 		document.getElementById('infoLink').style.color = 'Black';
