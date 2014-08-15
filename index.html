@@ -141,7 +141,7 @@ function login()
 					else
 					{	
 						document.forms['promoForm']['salespersonid'].value = custid;				
-						$('#menu').show();
+						/*$('#menu').show();*/
 						toggleContainer('productDesc','specInstruct','productInfo');
 					}
 			})
@@ -190,14 +190,6 @@ function login()
 
 </head>
 <body>
-<div id="menu" style="background-color:#CECECE;width:100%;padding:25px 0px 25px 0px;">
-	&nbsp;&nbsp;&nbsp;&nbsp;
-	<a id="descLink" href="javascript:toggleContainer('productDesc','specInstruct','productInfo');" style="text-decoration:none;color:black;">Description</a>
-	&nbsp;&nbsp;&nbsp;&nbsp;
-   	<a id="specLink" href="javascript:toggleContainer('specInstruct','productInfo','productDesc');" style="text-decoration:none;color:white;">Instructions</a>
-   	&nbsp;&nbsp;&nbsp;&nbsp;
-   	<a id="infoLink" href="javascript:toggleContainer('productInfo','productDesc','specInstruct');" style="text-decoration:none;color:white;">Information</a>
-</div>
 
 <form name="promoForm" enctype="multipart/form-data" method="post" onsubmit="return validate;" action="">
 <input type="hidden" id="salespersonid" name="salespersonid" value="" />
