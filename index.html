@@ -1,4 +1,11 @@
 
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>ODCPD Portal</title>
+<meta http-equiv="Content-Type" 		content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" 	content="text/css" />
+
 <script type="text/javascript" src="https://www.ppicic.com/js/jquery/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="https://www.ppicic.com/js/jquery/jquery-ui.js"></script>
 <script type="text/javascript" src="https://www.ppicic.com/js/jquery/jquery-ui-1.10.3.custom.js"></script>
@@ -74,12 +81,105 @@ function toggleContainer(s,h1,h2)
 	$(show).show();
 	$(hide1).hide();
 	$(hide2).hide();
+	$('#login').hide();
 }
 $(document).ready(function() 
 {
+	$('#productDesc').hide();
 	$('#specInstruct').hide();
 	$('#productInfo').hide();
+	$('#menu').hide();
 })	
+function showP()
+{
+	document.getElementById('password').type='text';
+}
+function hideP()
+{
+	document.getElementById('password').type='password';
+}
+function login()
+{
+	var username = document.forms['promoForm']['username'].value;
+	var password = document.forms['promoForm']['password'].value;
+	var msg      = '';
+	
+	if(username == '')
+	{
+		msg = 'Please enter a username.\n';
+	}
+	if(password == '')
+	{
+		msg = msg + 'Please enter a password.\n';
+	}
+	
+	if(msg != '')
+	{
+		alert(msg);
+	}
+	else
+	{
+		/*prompt('','http://www.odpromo.com/apps/mobile/components/mobile.cfc?method=mobileLogin&username='+username+'&password='+password);*/
+		
+		$.get('https://www.odpromo.com/apps/mobile/components/mobile.cfc?method=mobileLogin&username='+username+'&password='+password,
+		function(data){
+					alert(data);
+					dataArr = data.split('|');
+					if(dataArr.length > 1)
+					{
+						var user   = dataArr[0];
+						var custid = dataArr[1];
+					}
+					else
+					{
+						var custid = dataArr[0];
+					}
+					if(isNaN(custid))
+					{
+						alert(data);
+					}
+					else
+					{	
+						document.forms['promoForm']['salespersonid'].value = custid;				
+						$('#menu').show();
+						toggleContainer('productDesc','specInstruct','productInfo');
+					}
+			})
+		/*$.ajax( {
+				url: 'http://www.odpromo.com/apps/mobile/components/mobile.cfc?method=mobileLogin',
+				type: 'post',
+				data: {
+					username:		username,
+					password:		password
+				},
+				dataType: 'html',
+				success: function( data )
+				{ 
+					alert(data);
+					dataArr = data.split('|');
+					if(dataArr.length > 1)
+					{
+						var user   = dataArr[0];
+						var custid = dataArr[1];
+					}
+					else
+					{
+						var custid = dataArr[0];
+					}
+					if(isNaN(custid))
+					{
+						alert(data);
+					}
+					else
+					{	
+						document.forms['promoForm']['salespersonid'].value = custid;				
+						$('#menu').show();
+						toggleContainer('productDesc','specInstruct','productInfo');
+					}
+				}
+			});*/
+	}
+}
 </script>
 
 <style>
@@ -88,7 +188,9 @@ $(document).ready(function()
 }
 </style>
 
-<div style="background-color:#CECECE;width:100%;padding:25px 0px 25px 0px;">
+</head>
+<body>
+<div id="menu" style="background-color:#CECECE;width:100%;padding:25px 0px 25px 0px;">
 	&nbsp;&nbsp;&nbsp;&nbsp;
 	<a id="descLink" href="javascript:toggleContainer('productDesc','specInstruct','productInfo');" style="text-decoration:none;color:black;">Description</a>
 	&nbsp;&nbsp;&nbsp;&nbsp;
@@ -98,6 +200,41 @@ $(document).ready(function()
 </div>
 
 <form name="promoForm" enctype="multipart/form-data" method="post" onsubmit="return validate;" action="">
+<input type="hidden" id="salespersonid" name="salespersonid" value="" />
+<div id="login">
+    <table style="width:100%;">
+    	<tr>
+        	<td colspan="2">&nbsp;</td>
+        </tr>
+    	<tr style="background-color:#CECECE;">
+        	<td style="padding:10px 0px 10px 10px;" colspan="2">Login</td>
+        </tr>
+    	<tr>
+        	<td colspan="2">&nbsp;</td>
+        </tr>
+    	<tr>
+        	<td align="center" colspan="2">Please enter your credentials below:</td>
+        </tr>
+    	<tr>
+        	<td align="center" colspan="2">
+            	<table>
+                    <tr>
+                        <td>USERNAME</td><td><input type="text" name="username" id="username" value="" style="width:150px;" /></td>
+                    </tr>
+                    <tr>
+                        <td>PASSWORD</td><td><input type="password" name="password" id="password" value="" style="width:150px;" /></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    	<tr>
+        	<td colspan="2">&nbsp;</td>
+        </tr>
+    	<tr>
+        	<td align="right" colspan="2"><a href="javascript:login();"><img src="https://www.ppicic.com/imgCenter/odpromo/portal/icons/rightArrow.png" height="50px" /></a></td>
+        </tr>
+    </table>
+</div>
 <div id="productDesc">
     <table style="width:100%;">
     	<tr>
@@ -189,9 +326,10 @@ $(document).ready(function()
             <td>Item Color:</td><td><input type="text" name="color" id="color" value="" /></td>
         </tr>
         <tr>
-            <td colspan="2">
-                <input type="radio" name="proofReq" id="proofReq" value="1" checked />&nbsp;&nbsp;E-Proof Required&nbsp;&nbsp;
-                <input type="radio" name="proofReq" id="proofReq" value="0" />&nbsp;&nbsp;E-Proof Waived
+            <td style="vertical-align:top;">E-Proof:</td>
+            <td>
+                <input type="radio" name="proofReq" id="proofReq" value="1" checked />Required<br />
+                <input type="radio" name="proofReq" id="proofReq" value="0" />Waived
             </td>
         </tr>
     	<tr>
@@ -203,3 +341,5 @@ $(document).ready(function()
     </table>
 </div>
 </form>
+</body>
+</html>
